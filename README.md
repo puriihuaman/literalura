@@ -51,7 +51,7 @@ cd api-electro
    mvn spring-boot:run
    ```
 7. **Realizar peticiones**
-    - Con aplicación en ejecución puede realizar las peticiones a los siguientes `endpoints` indicado en el 
+    - Con aplicación en ejecución puede realizar las peticiones a los siguientes `endpoints` indicado en el
       siguiente paso ().
     - _Recomendación_: Primero hacer las peticiones `POST`.
 
@@ -75,11 +75,6 @@ cd api-electro
 | GET    | `api/translators?birthYear={1835}&page={2}` | Filtra los traductores que coincida con el año del cumpleaños y la página indicada. |
 | GET    | `api/languages`                             | Retorna un listado de lenguajes.                                                    |
 | GET    | `api/languages/{code}`                      | Retorna un lenguaje que coincida con el código.                                     |
-
-### Languages
-
-- Consultar languages: `GET /api/languages`
-- Consultar traductor: `GET /api/languages/{code}`
 
 ## Contribuciones
 
