@@ -5,10 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
 @Configuration
-@EntityScan("com.puriihuaman.literalura.domain")
-@EnableJpaRepositories("com.puriihuaman.literalura.repos")
+@EntityScan("com.puriihuaman.literalura.persistence.domain")
+@EnableJpaRepositories("com.puriihuaman.literalura.persistence.repos")
 @EnableTransactionManagement
 public class DomainConfig {
 }
