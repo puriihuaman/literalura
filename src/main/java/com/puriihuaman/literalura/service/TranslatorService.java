@@ -1,10 +1,10 @@
 package com.puriihuaman.literalura.service;
 
 import com.puriihuaman.literalura.commons.enums.ApiError;
-import com.puriihuaman.literalura.mapper.AuthorMapper;
-import com.puriihuaman.literalura.persistence.domain.AuthorEntity;
-import com.puriihuaman.literalura.persistence.dto.response.AuthorResponseDTO;
-import com.puriihuaman.literalura.persistence.repos.AuthorRepository;
+import com.puriihuaman.literalura.mapper.TranslatorMapper;
+import com.puriihuaman.literalura.persistence.domain.TranslatorEntity;
+import com.puriihuaman.literalura.persistence.dto.response.TranslatorResponseDTO;
+import com.puriihuaman.literalura.persistence.repos.TranslatorRepository;
 import com.puriihuaman.literalura.exception.ApiRequestException;
 import com.puriihuaman.literalura.util.Specifications;
 import lombok.AllArgsConstructor;
@@ -19,16 +19,16 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class AuthorsService {
-    private final AuthorRepository authorsRepository;
-    private final AuthorMapper authorMapper;
+public class TranslatorService {
+    private final TranslatorRepository translatorRepository;
+    private final TranslatorMapper translatorMapper;
     
-    public Page<AuthorResponseDTO> findAll(final Map<String, String> keywords, final Pageable pageable) {
+    public Page<TranslatorResponseDTO> findAll(final Map<String, String> keywords, final Pageable pageable) {
         try {
-            Specification<AuthorEntity> spec = Specifications.forAuthor(keywords);
-            Page<AuthorEntity> response = authorsRepository.findAll(spec, pageable);
+            Specification<TranslatorEntity> spec = Specifications.forTranslator(keywords);
+            Page<TranslatorEntity> response = translatorRepository.findAll(spec, pageable);
             
-            return response.map(authorMapper::toDTO);
+            return response.map(translatorMapper::toDTO);
         } catch (ApiRequestException ex) {
             throw ex;
         } catch (DataAccessException ex) {
@@ -38,17 +38,17 @@ public class AuthorsService {
         }
     }
     
-    public AuthorResponseDTO findById(final Long id) {
+    public TranslatorResponseDTO findById(final Long id) {
         try {
-            Optional<AuthorEntity> response = authorsRepository.findById(id);
+            Optional<TranslatorEntity> response = translatorRepository.findById(id);
             
             if (response.isEmpty()) {
-                String message = "The author with ID %d does not exist or has been deleted.".formatted(id);
-                throw new ApiRequestException(ApiError.RECORD_NOT_FOUND, "Author not found", message);
+                String message = "The translator with ID %d does not exist or has been deleted.".formatted(id);
+                throw new ApiRequestException(ApiError.RECORD_NOT_FOUND, "Translator not found", message);
             }
-            AuthorEntity author = response.get();
+            TranslatorEntity translator = response.get();
             
-            return authorMapper.toDTO(author);
+            return translatorMapper.toDTO(translator);
         } catch (ApiRequestException ex) {
             throw ex;
         } catch (DataAccessException ex) {
@@ -58,11 +58,11 @@ public class AuthorsService {
         }
     }
     
-    public Page<AuthorResponseDTO> findByName(final String name, final Pageable pageable) {
+    public Page<TranslatorResponseDTO> findByName(final String name, final Pageable pageable) {
         try {
-            Page<AuthorEntity> response = authorsRepository.findByNameContainingIgnoreCase(name, pageable);
+            Page<TranslatorEntity> response = translatorRepository.findByNameContainingIgnoreCase(name, pageable);
             
-            return response.map(authorMapper::toDTO);
+            return response.map(translatorMapper::toDTO);
         } catch (ApiRequestException ex) {
             throw ex;
         } catch (DataAccessException ex) {
